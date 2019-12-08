@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             this.gameObject.SetActive(false);
-            SpawnLoggoliath.enemiesDefeated += 1;
+            SpawnLoggoliath.enemiesDefeated++;
         }
     }
 

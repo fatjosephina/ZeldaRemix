@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Loggo : Enemy
@@ -30,13 +31,13 @@ public class Loggo : Enemy
     {
         if (Vector3.Distance(target.position, transform.position) <= chaseRadius && Vector3.Distance(target.position, transform.position) > attackRadius)
         {
-            if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
+            if ((currentState == EnemyState.idle || currentState == EnemyState.walk) && currentState != EnemyState.stagger)
             {
+                anim.SetBool("wakeUp", true);
                 Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
                 ChangeAnim(temp - transform.position);
                 myRigidBody.MovePosition(temp);
                 ChangeState(EnemyState.walk);
-                anim.SetBool("wakeUp", true);
             }
         }
         else if (Vector3.Distance(target.position, transform.position) > chaseRadius)
