@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public Message playerHealthSignal;
     public GameObject gameOverText;
     public GameObject restartButton;
+    public AudioSource swordSwipe;
+    public AudioSource hurt;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         positionChange.y = Input.GetAxisRaw("Vertical");
         if (Input.GetButtonDown("Fire1") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
         {
+            swordSwipe.Play();
             StartCoroutine(AttackCo());
         }
         else if (currentState == PlayerState.walk || currentState == PlayerState.idle)
@@ -82,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Knock(float knockTime, float damage)
     {
+        hurt.Play();
         currentHealth.runtimeValue -= damage;
         playerHealthSignal.Raise();
         if (currentHealth.runtimeValue > 0)

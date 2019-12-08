@@ -8,6 +8,7 @@ public class SpawnLoggoliath : MonoBehaviour
     public static int enemiesDefeated;
     public bool loggoliathSpawned;
     public bool loggitosSpawned;
+    public AudioSource dingDong;
 
     public GameObject loggoliath;
     public GameObject loggito0;
@@ -59,10 +60,19 @@ public class SpawnLoggoliath : MonoBehaviour
         {
             SetLoggitosActive();
         }
-        if (enemiesDefeated == 19)
+        if (enemiesDefeated >= 19)
         {
+            if (breakableWall.activeInHierarchy == true)
+            {
+                PlayDingDong();
+            }
             breakableWall.SetActive(false);
         }
+    }
+
+    void PlayDingDong()
+    {
+        dingDong.Play();
     }
 
     private async void SetLoggoliathActive()

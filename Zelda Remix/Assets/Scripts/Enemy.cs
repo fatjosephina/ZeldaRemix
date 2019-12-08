@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public string enemyName;
     public int baseAttack;
     public float moveSpeed;
+    public AudioSource hurt;
 
     private void Awake()
     {
@@ -31,11 +32,13 @@ public class Enemy : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             SpawnLoggoliath.enemiesDefeated++;
+
         }
     }
 
     public void Knock(Rigidbody2D myRigidBody, float knockTime, float damage)
     {
+        hurt.Play();
         StartCoroutine(KnockCo(myRigidBody, knockTime));
         TakeDamage(damage);
     }
