@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject restartButton;
     public AudioSource swordSwipe;
     public AudioSource hurt;
+    public AudioSource music;
+    public AudioSource deathSound;
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +96,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            music.Pause();
+            deathSound.Play();
             this.gameObject.SetActive(false);
             gameOverText.SetActive(true);
             restartButton.SetActive(true);
